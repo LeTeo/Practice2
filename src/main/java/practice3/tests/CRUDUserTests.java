@@ -4,13 +4,12 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import practice3.classes.CRUDPokerPlayer;
 import practice3.classes.PokerPlayer;
 import practice3.interfaces.pages.IEditPlayerPage;
 import practice3.interfaces.pages.IInsertPlayerPage;
-import practice3.interfaces.pages.IPlayersPage;
 import practice3.pages.EditPlayerPage;
 import practice3.pages.InsertPlayerPage;
 import practice3.pages.PlayersPage;
@@ -25,11 +24,9 @@ import practice3.interfaces.IPokerPlayer;
  */
 public class CRUDUserTests  {
 
-    private static final String INSERT_GROUP = "Insert";
+    private static final String INSERT_GROUP = "Insert";//Declare and initialize const
     private static final String DELETE_GROUP = "Delete";
-    private static final String PATH_TO_FILE_POKERPLAYERS = "pokerPlayers.txt";
-
-
+    private static final String PATH_TO_FILE_POKERPLAYERS = "pokerPlayers.txt";//name of file save poker players what have been created
     private static final String YOU_ARE_NOT_ON_INSERT_PAGE = "You are NOT on insert page";
     private static final String YOU_ARE_NOT_ON_EDIT_PAGE = "You are NOT on edit page";
     private static final String YOU_ARE_NOT_ON_PLAYERS_PAGE = "You are NOT on players page";
@@ -43,22 +40,21 @@ public class CRUDUserTests  {
     private static final String DELETE_ALERT_TEXT = "Do you really want to delete the record?";
     private static final String WRONG_MODAL_DIALOG = "Wrong modal dialog";
     private static final String WRONG_DELETE_MESSAGE = "Wrong delete message";
-    private static final String ERROR_READING_FIELDS = "ERROR_READING_FIELDS";
-
-
+    private static final String ERROR_READING_FIELDS = "ERROR READING FIELDS";
+    private static final String POKER_PLAYER_NOT_CREATED = "Poker player not created";
+    private static final String EMPTY_STRING_ADDRESS = "";
     private WebDriver driver; // Declare var
     private PlayersPage playersPage;
     private LoginTests loginTests;
-    private IInsertPlayerPage IInsertPlayerPage;
-    private IEditPlayerPage IEditPlayerPage;
+    private IInsertPlayerPage insertPlayerPage;
+    private IEditPlayerPage editPlayerPage;
     private IPokerPlayer pokerPlayer;
-
 
     private void setLoginTestsDriver() {
         setDriver(loginTests.getDriver());
     }
 
-    public void setDriver(WebDriver driver) {
+    private void setDriver(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -70,13 +66,8 @@ public class CRUDUserTests  {
         loginTests.positiveTest();
         setLoginTestsDriver();
         playersPage = new PlayersPage(driver);
-        IInsertPlayerPage = new InsertPlayerPage(driver);
-        IEditPlayerPage = new EditPlayerPage(driver);
-    }
-
-    @BeforeMethod(groups = INSERT_GROUP)
-    public void beforeMethod(){
-
+        insertPlayerPage = new InsertPlayerPage(driver);
+        editPlayerPage = new EditPlayerPage(driver);
     }
 
     /**
@@ -97,59 +88,87 @@ public class CRUDUserTests  {
         playersPage.clickOnInsertButton();
         Assert.assertEquals(driver.getTitle(), IInsertPlayerPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl(), IInsertPlayerPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);
-        pokerPlayer = IInsertPlayerPage.insertRandomPokerPlayer();
+        pokerPlayer = insertPlayerPage.insertRandomPokerPlayer();
         Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl(), PlayersPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);
         playersPage.findPlayerByUsername(pokerPlayer.getUsername());
         playersPage.openEditFormByUsername(pokerPlayer.getUsername());
         Assert.assertEquals(driver.getTitle(), IEditPlayerPage.TITLE, WRONG_TITLE);
-        IPokerPlayer pokerPlayerFromEditForm = IEditPlayerPage.getPokerPlayerFromEditForm();
+        IPokerPlayer pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
         assertFieldsWithErrors(pokerPlayerFromEditForm, pokerPlayer);
-        IEditPlayerPage.editPokerPlayerAndSave(pokerPlayer,pokerPlayerFromEditForm);
+        editPlayerPage.editPokerPlayerAndSave(pokerPlayer,pokerPlayerFromEditForm);
         playersPage.openEditFormByUsername(pokerPlayer.getUsername());
-        pokerPlayerFromEditForm = IEditPlayerPage.getPokerPlayerFromEditForm();
+        pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
         assertFields(pokerPlayerFromEditForm, pokerPlayer);
-        //Вернутся к странице Players и проверить
-        //editPlayerPage.clickOnButtonCancel();
-        //Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE, WRONG_TITLE);
-        //Assert.assertEquals(driver.getCurrentUrl(), PlayersPage.URL, YOU_ARE_NOT_ON_PLAYERS_PAGE);
     }
 
+    /**
+     * 1. Open players oage
+     * 2. Click on insert button on players page
+     * 3. Verify Player - Insert title
+     * 4. Verify "http://80.92.229.236:81/players/insert"; url
+     * 5. Click on cancel button
+     * 6. Switch to alert after click
+     * 7. Verify alert text
+     * 8. Click on alert accept button
+     * 9. Verify title Player - Insert page
+     */
     @Test
-    public void insertUserNegativeAlertCanceAccept(){
+    public void insertUserNegativeAlertCancelAccept(){
         playersPage.open();
         playersPage.clickOnInsertButton();
         Assert.assertEquals(driver.getTitle(), IInsertPlayerPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl(), IInsertPlayerPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);
-        pokerPlayer = IInsertPlayerPage.insertRandomPokerPlayerAndClickButtonCancel();
+        insertPlayerPage.clickOnButtonCancel();
         Alert alertCancel = driver.switchTo().alert();
         Assert.assertEquals(alertCancel.getText(), IInsertPlayerPage.CANCEL_ALERT_MESSAGE,WRONG_MODAL_DIALOG);
         alertCancel.accept();
         Assert.assertEquals(driver.getTitle(), IInsertPlayerPage.TITLE,WRONG_TITLE);
     }
 
+    /**
+     * 1. Open players oage
+     * 2. Click on insert button on players page
+     * 3. Verify Player - Insert title
+     * 4. Verify "http://80.92.229.236:81/players/insert"; url
+     * 5. Click on cancel button
+     * 6. Switch to alert after click
+     * 7. Verify alert text
+     * 8. Click on alert cancel button
+     * 9. Verify title Players page
+     */
     @Test
-    public void insertUserNegativeAlertCanceDismiss(){
+    public void insertUserNegativeAlertCancelDismiss(){
         playersPage.open();
         playersPage.clickOnInsertButton();
         Assert.assertEquals(driver.getTitle(), IInsertPlayerPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl(), IInsertPlayerPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);
-        pokerPlayer = IInsertPlayerPage.insertRandomPokerPlayerAndClickButtonCancel();
+        pokerPlayer = insertPlayerPage.insertRandomPokerPlayerAndClickButtonCancel();
         Alert alertCancel = driver.switchTo().alert();
         Assert.assertEquals(alertCancel.getText(), IInsertPlayerPage.CANCEL_ALERT_MESSAGE,WRONG_MODAL_DIALOG);
         alertCancel.dismiss();
-        Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE ,WRONG_TITLE);
+        Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE, WRONG_TITLE);
     }
 
+    /**
+     * Verify players fields with mistakes
+     * @param actualPokerPlayer actual player with wrong fields
+     * @param expectedPokerPlayer expected player with fields
+     */
     private void assertFieldsWithErrors(IPokerPlayer actualPokerPlayer, IPokerPlayer expectedPokerPlayer) {
         Assert.assertEquals(actualPokerPlayer.getEmail(), expectedPokerPlayer.getEmail(), WRONG_EMAIL);
         Assert.assertEquals(actualPokerPlayer.getFirstName(), expectedPokerPlayer.getLastName(), WRONG_FIRST_NAME);
         Assert.assertEquals(actualPokerPlayer.getLastName(), expectedPokerPlayer.getFirstName(), WRONG_LAST_NAME);
         Assert.assertEquals(actualPokerPlayer.getCity(), expectedPokerPlayer.getCity(), WRONG_CITY);
-        Assert.assertEquals(actualPokerPlayer.getAddress(), "", WRONG_ADDRESS);
+        Assert.assertEquals(actualPokerPlayer.getAddress(), EMPTY_STRING_ADDRESS, WRONG_ADDRESS);
         Assert.assertEquals(actualPokerPlayer.getPhone(), expectedPokerPlayer.getPhone(), WRONG_PHONE);
     }
 
+    /**
+     * Strong verify players correct filled fields
+     * @param actualPokerPlayer actual player with correct filled fields
+     * @param expectedPokerPlayer expected player with correct filled fields
+     */
     private void assertFields(IPokerPlayer actualPokerPlayer, IPokerPlayer expectedPokerPlayer) {
         Assert.assertEquals(actualPokerPlayer.getEmail(), expectedPokerPlayer.getEmail(), WRONG_EMAIL);
         Assert.assertEquals(actualPokerPlayer.getFirstName(), expectedPokerPlayer.getFirstName(), WRONG_FIRST_NAME);
@@ -165,7 +184,12 @@ public class CRUDUserTests  {
      * 3. Click on edit button
      * 4. Check actual title and title edit player page
      * 5. Check actual url and url edit player page
-     * 6.
+     * 6. Get poker player from edit form fields
+     * 7. Generate random fields for updated player and include in this player field username from get poker player from edit form fields
+     * 8. Click on button save
+     * 9-10. Click on edit button and search updated user.
+     * 11. Verify fields updated player with errors
+     * 12-16. Again open edit form for edit and check fields after previously edit Снова открыть форму редактирования, проверить, что изменения успешно применены
      */
     @Test(dependsOnGroups = INSERT_GROUP)
     public void updateUser(){
@@ -174,17 +198,33 @@ public class CRUDUserTests  {
         playersPage.clickOnEditButton(pokerPlayer.getUsername());
         Assert.assertEquals(driver.getTitle(), IEditPlayerPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl().substring(0, IEditPlayerPage.URL.length()), IEditPlayerPage.URL, YOU_ARE_NOT_ON_EDIT_PAGE);
-        //editPlayerPage.editPokerPlayerAndSave(pokerPlayer,editPlayerPage.getPokerPlayerFromEditForm());
-        //Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE, WRONG_TITLE);
-        //Assert.assertEquals(driver.getCurrentUrl(), PlayersPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);
+        IPokerPlayer pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
+        IPokerPlayer updatedPokerPlayer = CRUDPokerPlayer.editPokerPlayer(pokerPlayer.RandomFields(),pokerPlayerFromEditForm);
+        editPlayerPage.clickOnButtonSave();
+        playersPage.clickOnEditButton(updatedPokerPlayer.getUsername());
+        pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
+        assertFieldsWithErrors(pokerPlayerFromEditForm, updatedPokerPlayer);
+        editPlayerPage.editPokerPlayerAndSave(pokerPlayer,pokerPlayerFromEditForm);
+        playersPage.openEditFormByUsername(pokerPlayer.getUsername());
+        pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
+        assertFields(pokerPlayerFromEditForm, pokerPlayer);
     }
 
+    /**
+     * 1. Open players page
+     * 2-3. Find poker player TODO find poker player, another way
+     * 4. Click on delete button with find name poker player
+     * 5. Switch to delete modal dialog (alert)
+     * 6. Verify Title delete modal dialog
+     * 7. Click accept on delete modal dialog
+     * 8. Verify delete message on players page
+     * 9. Verify title on players page
+     */
     @Test(dependsOnGroups = INSERT_GROUP, groups = DELETE_GROUP)
     //@Test
     public void PositiveDeleteUser(){
         playersPage.open();
         IPokerPlayer pokerPlayer = new PokerPlayer();
-
         //pokerPlayer.setUsername("user1500"); pokerPlayer.getUsernameLastCreatedPlayer();
         //pokerPlayer.setEmail("player1500@test.com"); pokerPlayer.getEmailLastCreatedPlayer();
         playersPage.findPlayerByUsernameAndEmail(pokerPlayer.getUsername(),pokerPlayer.getEmail());
@@ -197,27 +237,52 @@ public class CRUDUserTests  {
         //playersPage.findPlayerByUsername(pokerPlayer.getUsername());
     }
 
+    /**
+     * 1. Open players page
+     * 2-3. Find poker player by username
+     * 4. Click on edit button with poker player with username
+     * 5. Copy from edit player page fields in poker player
+     * 6. Open players page
+     * 7. Find poker player who was copy
+     * 8. Generate new password and login name
+     * 9. Insert new player
+     */
     @Test(dependsOnGroups = INSERT_GROUP)
     public void copyUser(){
         playersPage.open();
+        //TODO way to find username
         playersPage.findPlayerByUsername(pokerPlayer.getUsername());
         playersPage.clickOnEditButton(pokerPlayer.getUsername());
-        pokerPlayer = IEditPlayerPage.getPokerPlayerFromEditForm();
+        pokerPlayer = editPlayerPage.getPokerPlayerFromEditForm();
         playersPage.open();
         playersPage.findPlayerByUsername(pokerPlayer.getUsername());
-        Assert.assertEquals(pokerPlayer!=null, true, ERROR_READING_FIELDS);
+        Assert.assertEquals(pokerPlayer!=null, true, POKER_PLAYER_NOT_CREATED);
+        playersPage.insertPlayerClone(playersPage, pokerPlayer, editPlayerPage);
     }
 
+    /**
+     *
+     * 1. Open player page
+     * 2. Verify if exist stored player in program
+     * 3. Find player by username what have insert before in unit test (TODO need find another way)
+     * 4. Click on edit button (icon in right of the middle border on players page)
+     * 5. Copy fields into poker player from program
+     * 6. Verify if exist stored player in program
+     */
     @Test(groups = INSERT_GROUP)
     public void readUser(){
         playersPage.open();
+        Assert.assertEquals(pokerPlayer!=null, true, POKER_PLAYER_NOT_CREATED);
         playersPage.findPlayerByUsername(pokerPlayer.getUsername());
         playersPage.clickOnEditButton(pokerPlayer.getUsername());
-        pokerPlayer = IEditPlayerPage.getPokerPlayerFromEditForm();
+        pokerPlayer = editPlayerPage.getPokerPlayerFromEditForm();
         Assert.assertEquals(pokerPlayer!=null, true, ERROR_READING_FIELDS);
         //playersPage.readUser();
     }
 
+    /**
+     * TODO maybe save in file on serialize, inserted, or copied players
+     */
     @AfterTest()
     public void afterTest(){
 //        loginTests.afterTest();

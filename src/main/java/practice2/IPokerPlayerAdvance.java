@@ -4,45 +4,45 @@ package practice2;
  * Created by ly0w on 02.12.2016.
  */
 public interface IPokerPlayerAdvance {
-    String getPlayer_Balance();
+    String getPlayerBalance();
 
-    void setPlayer_Balance(String player_Balance);
+    void setPlayerBalance(String playerBalance);
 
     String getState();
 
     void setState(String state);
 
-    String getLast_Login();
+    String getLastLogin();
 
-    void setLast_Login(String last_Login);
+    void setLastLogin(String lastLogin);
 
-    String getShow_Deleted();
+    String getShowDeleted();
 
-    void setShow_Deleted(String show_Deleted);
+    void setShowDeleted(String showDeleted);
 
-    String getReg_Date_from();
+    String getRegDateFrom();
 
-    void setReg_Date_from(String reg_Date_from);
+    void setRegDateFrom(String regDateFrom);
 
-    String getReg_Date_till();
+    String getRegDateTill();
 
-    void setReg_Date_till(String reg_Date_till);
+    void setRegDateTill(String regDateTill);
 
-    String getExternal_IP_Address();
+    String getExternalIPAddress();
 
-    void setExternal_IP_Address(String external_IP_Address);
+    void setExternalIPAddress(String externalIPAddress);
 
-    String getVIP_Level();
+    String getVipLevel();
 
-    void setVIP_Level(String VIP_Level);
+    void setVipLevel(String vipLevel);
 
-    String getΒ_Community();
+    String getbCommunity();
 
-    void setΒ_Community(String β_Community);
+    void setbCommunity(String bCommunity);
 
-    String getMAC_Address();
+    String getMacAddress();
 
-    void setMAC_Address(String MAC_Address);
+    void setMacAddress(String macAddress);
 
     @Override
     String toString();

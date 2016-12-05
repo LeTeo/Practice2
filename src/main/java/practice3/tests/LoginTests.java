@@ -31,7 +31,6 @@ public class LoginTests {
             (TEST_POSITIVE_VALUE.getUsername(), "");
     public static final IPokerPlayerSmall NEGATIVE_TEST_EMPTY_FIELDS_VALUE = new PokerPlayerSmall
             ("", "");
-
     //End Test values
     private static final String CSS_EXPECTED_ERORR_MSG = "Invalid username or password";
     private static final String CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG = "Value is required and can't be empty";
@@ -40,9 +39,8 @@ public class LoginTests {
     private static final String WRONG_TITLE_AFTER_LOGIN = "Wrong title after login";
     private static final String VALIDATION_ERROR_MESSAGE_IS_NOT_VALID = "Validation error message is not valid";
     private static final String YOU_ARE_STILL_ON_LOGIN_PAGE = "You are still on login page.";
-
     private WebDriver driver; // Declare var
-    private ILoginPage ILoginPage;
+    private ILoginPage loginPage;
 
     public WebDriver getDriver() {
         return driver;
@@ -64,25 +62,25 @@ public class LoginTests {
      */
     @BeforeMethod
     public void beforeMethod() {
-        ILoginPage = new LoginPage(driver);
-        ILoginPage.open(); //open poker URL
+        loginPage = new LoginPage(driver);
+        loginPage.open(); //open poker URL
     }
 
     /**
-     *                   Username Password
+     *                   username password
      *  1. Authorization "Admin", "123"
      *  2. Check TITLE
      *  3. Check Url
      */
     @Test(groups = LOGIN_GROUP)
     public void positiveTest() {
-        ILoginPage.authorization(TEST_POSITIVE_VALUE.getUsername(), TEST_POSITIVE_VALUE.getPassword());
+        loginPage.authorization(TEST_POSITIVE_VALUE.getUsername(), TEST_POSITIVE_VALUE.getPassword());
         Assert.assertEquals(driver.getTitle(), PlayersPage.TITLE, WRONG_TITLE_AFTER_LOGIN);
-        Assert.assertNotEquals(driver.getCurrentUrl(), ILoginPage.URL, YOU_ARE_STILL_ON_LOGIN_PAGE);
+        Assert.assertNotEquals(driver.getCurrentUrl(), loginPage.URL, YOU_ARE_STILL_ON_LOGIN_PAGE);
     }
 
     /**
-     *                   Username Password
+     *                   username password
      *  1. Authorization "Admin",  Random
      *  2. Check URL
      *  3. Check TITLE
@@ -90,15 +88,15 @@ public class LoginTests {
      */
     @Test(groups = LOGIN_GROUP)
     public void negativeTestWrongPassword(){
-        ILoginPage.authorization(NEGATIVE_TEST_WRONG_PASSWORD_VALUE);
-        Assert.assertEquals(driver.getCurrentUrl(), ILoginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
-        Assert.assertEquals(driver.getTitle(), ILoginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
-        Assert.assertEquals(ILoginPage.getErrorMessage(), CSS_EXPECTED_ERORR_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
+        loginPage.authorization(NEGATIVE_TEST_WRONG_PASSWORD_VALUE);
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
+        Assert.assertEquals(driver.getTitle(), loginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
+        Assert.assertEquals(loginPage.getErrorMessage(), CSS_EXPECTED_ERORR_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
     }
 
 
     /**
-     *                   Username Password
+     *                   username password
      *  1. Authorization    "",    "123"
      *  2. Check URL
      *  3. Check TITLE
@@ -106,14 +104,14 @@ public class LoginTests {
      */
     @Test(groups = LOGIN_GROUP)
     public void negativeTestLoginEmpty(){
-        ILoginPage.authorization(NEGATIVE_TEST_LOGIN_EMPTY_VALUE);
-        Assert.assertEquals(driver.getCurrentUrl(), ILoginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
-        Assert.assertEquals(driver.getTitle(), ILoginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
-        Assert.assertEquals(ILoginPage.getErrorMessageLogin(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
+        loginPage.authorization(NEGATIVE_TEST_LOGIN_EMPTY_VALUE);
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
+        Assert.assertEquals(driver.getTitle(), loginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
+        Assert.assertEquals(loginPage.getErrorMessageLogin(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
     }
 
     /**
-     *                   Username Password
+     *                   username password
      *  1. Authorization  "Admin",  ""
      *  2. Check URL
      *  3. Check TITLE
@@ -121,14 +119,14 @@ public class LoginTests {
      */
     @Test(groups = LOGIN_GROUP)
     public void negativeTestPasswordEmpty(){
-        ILoginPage.authorization(NEGATIVE_TEST_PASSWORD_EMPTY_VALUE);
-        Assert.assertEquals(driver.getCurrentUrl(), ILoginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
-        Assert.assertEquals(driver.getTitle(), ILoginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
-        Assert.assertEquals(ILoginPage.getErrorMessagePassword(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
+        loginPage.authorization(NEGATIVE_TEST_PASSWORD_EMPTY_VALUE);
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
+        Assert.assertEquals(driver.getTitle(), loginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
+        Assert.assertEquals(loginPage.getErrorMessagePassword(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
     }
 
     /**
-     *                   Username Password
+     *                   username password
      *  1. Authorization    "",      ""
      *  2. Check URL
      *  3. Check TITLE
@@ -137,11 +135,11 @@ public class LoginTests {
      */
     @Test(groups = LOGIN_GROUP)
     public void negativeTestEmptyFields(){
-        ILoginPage.authorization(NEGATIVE_TEST_EMPTY_FIELDS_VALUE);
-        Assert.assertEquals(driver.getCurrentUrl(), ILoginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
-        Assert.assertEquals(driver.getTitle(), ILoginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
-        Assert.assertEquals(ILoginPage.getErrorMessageLogin(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
-        Assert.assertEquals(ILoginPage.getErrorMessagePassword(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
+        loginPage.authorization(NEGATIVE_TEST_EMPTY_FIELDS_VALUE);
+        Assert.assertEquals(driver.getCurrentUrl(), loginPage.URL, YOU_ARE_NOT_ON_LOGIN_PAGE);
+        Assert.assertEquals(driver.getTitle(), LoginPage.TITLE, WRONG_TITLE_AFTER_UNSUCCESSFUL_LOGIN);
+        Assert.assertEquals(loginPage.getErrorMessageLogin(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
+        Assert.assertEquals(loginPage.getErrorMessagePassword(), CSS_EXPECTED_ERORR_USERNAME_OR_PASSWORD_MSG, VALIDATION_ERROR_MESSAGE_IS_NOT_VALID);
     }
 
     /**

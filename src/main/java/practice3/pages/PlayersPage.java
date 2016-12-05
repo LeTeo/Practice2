@@ -3,6 +3,8 @@ package practice3.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import practice3.interfaces.IPokerPlayer;
+import practice3.interfaces.pages.IEditPlayerPage;
 
 /**
  * Created by Serhii on 30-Nov-16.
@@ -20,8 +22,7 @@ public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
     public static final String XPATH_FIND_USERNAME_DELETE_OPEN = ".//tr[.//a[text()='";
     public static final String XPATH_FIND_USERNAME_DELETE_CLOSE = "']]//img[@title='Delete']";
     public static final String XPATH_DELETE_SUCCESS = ".//div[@class='datagrid_flashmessagespanel_container']/ul";
-
-    public static final String VALUE = "VALUE";
+    public static final String VALUE = "value";
     private static final String EMAIL_FIELD_ID = "723a925886__email";
     public static final String DELETE_MESSAGE = "Player has been deleted";
 
@@ -78,4 +79,14 @@ public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
     }
 
 
+    public IPokerPlayer insertPlayerClone(PlayersPage playersPage, IPokerPlayer pokerPlayer, IEditPlayerPage editPlayerPage) {
+        playersPage.clickOnInsertButton();
+        playersPage.findPlayerByUsername(pokerPlayer.getUsername());
+        playersPage.openEditFormByUsername(pokerPlayer.getUsername());
+        IPokerPlayer pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
+        editPlayerPage.editPokerPlayerAndSave(pokerPlayer,pokerPlayerFromEditForm);
+        playersPage.openEditFormByUsername(pokerPlayer.getUsername());
+        pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
+        return pokerPlayerFromEditForm;
+    }
 }

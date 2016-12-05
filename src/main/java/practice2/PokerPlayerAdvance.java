@@ -5,124 +5,124 @@ package practice2;
  */
 public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvance {
 
-    private String Player_Balance;
-    private String State;
-    private String Last_Login;
-    private String Show_Deleted;
-    private String Reg_Date_from;
-    private String Reg_Date_till;
-    private String External_IP_Address;
-    private String VIP_Level;
-    private String β_Community;
-    private String MAC_Address;
+    private String playerBalance;
+    private String state;
+    private String lastLogin;
+    private String showDeleted;
+    private String regDateFrom;
+    private String regDateTill;
+    private String externalIPAddress;
+    private String vipLevel;
+    private String bCommunity;
+    private String macAddress;
 
-    public PokerPlayerAdvance(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country, String player_Balance, String state, String last_Login, String show_Deleted, String reg_Date_from, String reg_Date_till, String external_IP_Address, String VIP_Level, String β_Community, String MAC_Address) {
+    public PokerPlayerAdvance(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country, String player_Balance, String state, String last_Login, String show_Deleted, String reg_Date_from, String reg_Date_till, String external_IP_Address, String VIP_Level, String B_Community, String MAC_Address) {
         super(username, password, confirmPassword, email, first_Name, last_Name, city, address, phone, country);
-        Player_Balance = player_Balance;
-        State = state;
-        Last_Login = last_Login;
-        Show_Deleted = show_Deleted;
-        Reg_Date_from = reg_Date_from;
-        Reg_Date_till = reg_Date_till;
-        External_IP_Address = external_IP_Address;
-        this.VIP_Level = VIP_Level;
-        this.β_Community = β_Community;
-        this.MAC_Address = MAC_Address;
+        playerBalance = player_Balance;
+        this.state = state;
+        lastLogin = last_Login;
+        showDeleted = show_Deleted;
+        regDateFrom = reg_Date_from;
+        regDateTill = reg_Date_till;
+        externalIPAddress = external_IP_Address;
+        this.vipLevel = VIP_Level;
+        this.bCommunity = B_Community;
+        this.macAddress = MAC_Address;
 
     }
 
-    public String getPlayer_Balance() {
-        return Player_Balance;
+    public String getPlayerBalance() {
+        return playerBalance;
     }
 
-    public void setPlayer_Balance(String player_Balance) {
-        Player_Balance = player_Balance;
+    public void setPlayerBalance(String playerBalance) {
+        this.playerBalance = playerBalance;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public void setState(String state) {
-        State = state;
+        this.state = state;
     }
 
-    public String getLast_Login() {
-        return Last_Login;
+    public String getLastLogin() {
+        return lastLogin;
     }
 
-    public void setLast_Login(String last_Login) {
-        Last_Login = last_Login;
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
-    public String getShow_Deleted() {
-        return Show_Deleted;
+    public String getShowDeleted() {
+        return showDeleted;
     }
 
-    public void setShow_Deleted(String show_Deleted) {
-        Show_Deleted = show_Deleted;
+    public void setShowDeleted(String showDeleted) {
+        this.showDeleted = showDeleted;
     }
 
-    public String getReg_Date_from() {
-        return Reg_Date_from;
+    public String getRegDateFrom() {
+        return regDateFrom;
     }
 
-    public void setReg_Date_from(String reg_Date_from) {
-        Reg_Date_from = reg_Date_from;
+    public void setRegDateFrom(String regDateFrom) {
+        this.regDateFrom = regDateFrom;
     }
 
-    public String getReg_Date_till() {
-        return Reg_Date_till;
+    public String getRegDateTill() {
+        return regDateTill;
     }
 
-    public void setReg_Date_till(String reg_Date_till) {
-        Reg_Date_till = reg_Date_till;
+    public void setRegDateTill(String regDateTill) {
+        this.regDateTill = regDateTill;
     }
 
-    public String getExternal_IP_Address() {
-        return External_IP_Address;
+    public String getExternalIPAddress() {
+        return externalIPAddress;
     }
 
-    public void setExternal_IP_Address(String external_IP_Address) {
-        External_IP_Address = external_IP_Address;
+    public void setExternalIPAddress(String externalIPAddress) {
+        this.externalIPAddress = externalIPAddress;
     }
 
-    public String getVIP_Level() {
-        return VIP_Level;
+    public String getVipLevel() {
+        return vipLevel;
     }
 
-    public void setVIP_Level(String VIP_Level) {
-        this.VIP_Level = VIP_Level;
+    public void setVipLevel(String vipLevel) {
+        this.vipLevel = vipLevel;
     }
 
-    public String getΒ_Community() {
-        return β_Community;
+    public String getbCommunity() {
+        return bCommunity;
     }
 
-    public void setΒ_Community(String β_Community) {
-        this.β_Community = β_Community;
+    public void setbCommunity(String bCommunity) {
+        this.bCommunity = bCommunity;
     }
 
-    public String getMAC_Address() {
-        return MAC_Address;
+    public String getMacAddress() {
+        return macAddress;
     }
 
-    public void setMAC_Address(String MAC_Address) {
-        this.MAC_Address = MAC_Address;
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
     }
 
     public String toString() {
         return "PokerPlayerAdvance{" +
-                "Player_Balance='" + Player_Balance + '\'' +
-                ", State='" + State + '\'' +
-                ", Last_Login='" + Last_Login + '\'' +
-                ", Show_Deleted='" + Show_Deleted + '\'' +
-                ", Reg_Date_from='" + Reg_Date_from + '\'' +
-                ", Reg_Date_till='" + Reg_Date_till + '\'' +
-                ", External_IP_Address='" + External_IP_Address + '\'' +
-                ", VIP_Level='" + VIP_Level + '\'' +
-                ", β_Community='" + β_Community + '\'' +
-                ", MAC_Address='" + MAC_Address + '\'' +
+                "playerBalance='" + playerBalance + '\'' +
+                ", state='" + state + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                ", showDeleted='" + showDeleted + '\'' +
+                ", regDateFrom='" + regDateFrom + '\'' +
+                ", regDateTill='" + regDateTill + '\'' +
+                ", externalIPAddress='" + externalIPAddress + '\'' +
+                ", vipLevel='" + vipLevel + '\'' +
+                ", β_Community='" + bCommunity + '\'' +
+                ", macAddress='" + macAddress + '\'' +
                 "} " + super.toString();
     }
 
@@ -133,39 +133,39 @@ public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvan
 
         PokerPlayerAdvance that = (PokerPlayerAdvance) o;
 
-        if (getPlayer_Balance() != null ? !getPlayer_Balance().equals(that.getPlayer_Balance()) : that.getPlayer_Balance() != null)
+        if (getPlayerBalance() != null ? !getPlayerBalance().equals(that.getPlayerBalance()) : that.getPlayerBalance() != null)
             return false;
         if (getState() != null ? !getState().equals(that.getState()) : that.getState() != null) return false;
-        if (getLast_Login() != null ? !getLast_Login().equals(that.getLast_Login()) : that.getLast_Login() != null)
+        if (getLastLogin() != null ? !getLastLogin().equals(that.getLastLogin()) : that.getLastLogin() != null)
             return false;
-        if (getShow_Deleted() != null ? !getShow_Deleted().equals(that.getShow_Deleted()) : that.getShow_Deleted() != null)
+        if (getShowDeleted() != null ? !getShowDeleted().equals(that.getShowDeleted()) : that.getShowDeleted() != null)
             return false;
-        if (getReg_Date_from() != null ? !getReg_Date_from().equals(that.getReg_Date_from()) : that.getReg_Date_from() != null)
+        if (getRegDateFrom() != null ? !getRegDateFrom().equals(that.getRegDateFrom()) : that.getRegDateFrom() != null)
             return false;
-        if (getReg_Date_till() != null ? !getReg_Date_till().equals(that.getReg_Date_till()) : that.getReg_Date_till() != null)
+        if (getRegDateTill() != null ? !getRegDateTill().equals(that.getRegDateTill()) : that.getRegDateTill() != null)
             return false;
-        if (getExternal_IP_Address() != null ? !getExternal_IP_Address().equals(that.getExternal_IP_Address()) : that.getExternal_IP_Address() != null)
+        if (getExternalIPAddress() != null ? !getExternalIPAddress().equals(that.getExternalIPAddress()) : that.getExternalIPAddress() != null)
             return false;
-        if (getVIP_Level() != null ? !getVIP_Level().equals(that.getVIP_Level()) : that.getVIP_Level() != null)
+        if (getVipLevel() != null ? !getVipLevel().equals(that.getVipLevel()) : that.getVipLevel() != null)
             return false;
-        if (getΒ_Community() != null ? !getΒ_Community().equals(that.getΒ_Community()) : that.getΒ_Community() != null)
+        if (getbCommunity() != null ? !getbCommunity().equals(that.getbCommunity()) : that.getbCommunity() != null)
             return false;
-        return getMAC_Address() != null ? getMAC_Address().equals(that.getMAC_Address()) : that.getMAC_Address() == null;
+        return getMacAddress() != null ? getMacAddress().equals(that.getMacAddress()) : that.getMacAddress() == null;
 
     }
 
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getPlayer_Balance() != null ? getPlayer_Balance().hashCode() : 0);
+        result = 31 * result + (getPlayerBalance() != null ? getPlayerBalance().hashCode() : 0);
         result = 31 * result + (getState() != null ? getState().hashCode() : 0);
-        result = 31 * result + (getLast_Login() != null ? getLast_Login().hashCode() : 0);
-        result = 31 * result + (getShow_Deleted() != null ? getShow_Deleted().hashCode() : 0);
-        result = 31 * result + (getReg_Date_from() != null ? getReg_Date_from().hashCode() : 0);
-        result = 31 * result + (getReg_Date_till() != null ? getReg_Date_till().hashCode() : 0);
-        result = 31 * result + (getExternal_IP_Address() != null ? getExternal_IP_Address().hashCode() : 0);
-        result = 31 * result + (getVIP_Level() != null ? getVIP_Level().hashCode() : 0);
-        result = 31 * result + (getΒ_Community() != null ? getΒ_Community().hashCode() : 0);
-        result = 31 * result + (getMAC_Address() != null ? getMAC_Address().hashCode() : 0);
+        result = 31 * result + (getLastLogin() != null ? getLastLogin().hashCode() : 0);
+        result = 31 * result + (getShowDeleted() != null ? getShowDeleted().hashCode() : 0);
+        result = 31 * result + (getRegDateFrom() != null ? getRegDateFrom().hashCode() : 0);
+        result = 31 * result + (getRegDateTill() != null ? getRegDateTill().hashCode() : 0);
+        result = 31 * result + (getExternalIPAddress() != null ? getExternalIPAddress().hashCode() : 0);
+        result = 31 * result + (getVipLevel() != null ? getVipLevel().hashCode() : 0);
+        result = 31 * result + (getbCommunity() != null ? getbCommunity().hashCode() : 0);
+        result = 31 * result + (getMacAddress() != null ? getMacAddress().hashCode() : 0);
         return result;
     }
 }

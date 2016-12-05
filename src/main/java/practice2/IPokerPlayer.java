@@ -14,13 +14,13 @@ public interface IPokerPlayer {
 
     void setEmail(String email);
 
-    String getFirst_Name();
+    String getFirstName();
 
-    void setFirst_Name(String first_Name);
+    void setFirstName(String firstName);
 
-    String getLast_Name();
+    String getLastName();
 
-    void setLast_Name(String last_Name);
+    void setLastName(String lastName);
 
     String getCity();
 

@@ -10,7 +10,7 @@ import java.util.Hashtable;
  */
 public class CRUDPokerPlayer {
 
-    Hashtable <String,String> pokerPlayers;
+    Hashtable <String,IPokerPlayer> pokerPlayers;
 
     public static IPokerPlayer createRandomPokerPlayer(){
         return new PokerPlayer().RandomFields();
@@ -22,5 +22,10 @@ public class CRUDPokerPlayer {
 
     public static IPokerPlayer editPokerPlayer(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country){
         return new PokerPlayer(username, password, confirmPassword, email, first_Name, last_Name, city, address, phone, country);
+    }
+
+    public static IPokerPlayer editPokerPlayer(IPokerPlayer oldPokerPlayer, IPokerPlayer newPokerPlayer){
+        newPokerPlayer.setUsername(oldPokerPlayer.getUsername());
+        return newPokerPlayer;
     }
 }
