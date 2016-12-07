@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Poker Suite" verbose="1" >
+    <!-- Comment block -->
+
+    <test name="Login Tests1">
+        <parameter name="usrn" value="admin"/>
+        <parameter name="pswrd" value="123"/>
+        <parameter name="ttl" value="Players"/>
+        <classes>
+            <class name="practice4.poker.tests.LoginTests"/>
+        </classes>
+    </test>
+
+    <!--<test name="Login Tests2">
+        <parameter name="usrn" value="admin"/>
+        <parameter name="pswrd" value="1234"/>
+        <parameter name="ttl" value="Players"/>
+        <classes>
+            <class name="practice4.tests.LoginTests"/>
+        </classes>
+    </test>-->
+</suite>
