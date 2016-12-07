@@ -2,6 +2,7 @@ package practice3.interfaces;
 
 /**
  * Created by ly0w on 03.12.2016.
+ * For poker player small
  */
 public interface IPokerPlayerSmall {
     String getUsername();

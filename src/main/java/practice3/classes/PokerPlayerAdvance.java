@@ -4,7 +4,9 @@ import practice3.interfaces.IPokerPlayerAdvance;
 
 /**
  * Created by ly0w on 01.12.2016.
+ * Include more fields than Poker Player
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvance {
 
     private String playerBalance;
@@ -18,6 +20,7 @@ public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvan
     private String βCommunity;
     private String macAddress;
 
+    @SuppressWarnings("unused")
     public PokerPlayerAdvance(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country, String player_Balance, String state, String last_Login, String show_Deleted, String reg_Date_from, String reg_Date_till, String external_IP_Address, String vipLevel, String βCommunity, String macAddress) {
         super(username, password, confirmPassword, email, first_Name, last_Name, city, address, phone, country);
         playerBalance = player_Balance;
@@ -128,6 +131,7 @@ public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvan
                 "} " + super.toString();
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PokerPlayerAdvance)) return false;

@@ -8,6 +8,7 @@ import practice3.interfaces.pages.ILoginPage;
 
 /**
  * Created by Serhii on 30-Nov-16.
+ * Pattern PageObject for Login Page
  */
 public class LoginPage implements practice3.interfaces.pages.ILoginPage {
 
@@ -59,19 +60,13 @@ public class LoginPage implements practice3.interfaces.pages.ILoginPage {
     }
 
     public String getErrorMessage(){
-        WebElement errorMsgElement = driver.findElement(By.xpath(XPATH_CSS_ERROR));
-        String errorMsg = errorMsgElement.getText();
-        return errorMsg;
+        return driver.findElement(By.xpath(XPATH_CSS_ERROR)).getText();
     }
 
     public String getErrorMessageLogin() {
-        WebElement errorMsgElement = driver.findElement(By.xpath(XPATH_CSS_USERNAME_ERROR));
-        String errorMsg = errorMsgElement.getText();
-        return errorMsg;
+        return driver.findElement(By.xpath(XPATH_CSS_USERNAME_ERROR)).getText();
     }
     public String getErrorMessagePassword() {
-        WebElement errorMsgElement = driver.findElement(By.xpath(XPATH_CSS_PASSWORD_ERROR));
-        String errorMsg = errorMsgElement.getText();
-        return errorMsg;
+        return driver.findElement(By.xpath(XPATH_CSS_PASSWORD_ERROR)).getText();
     }
 }

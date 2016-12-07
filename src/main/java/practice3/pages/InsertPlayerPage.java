@@ -1,15 +1,13 @@
 package practice3.pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import practice3.classes.Elements;
-import practice3.interfaces.IElements;
-import practice3.interfaces.IPokerPlayer;
 import practice3.classes.PokerPlayer;
+import practice3.interfaces.IPokerPlayer;
 
 /**
  * Created by admin on 02.12.2016.
+ * Players - Insert Page
  */
 public class InsertPlayerPage implements practice3.interfaces.pages.IInsertPlayerPage {
 
@@ -52,7 +50,7 @@ public class InsertPlayerPage implements practice3.interfaces.pages.IInsertPlaye
         this.driver = driver;
     }
 
-    public static IPokerPlayer createRandomPokerPlayer(){
+    private IPokerPlayer createRandomPokerPlayer(){
         return new PokerPlayer().RandomFields();
     }
 

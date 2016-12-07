@@ -4,9 +4,16 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Created by ly0w on 03.12.2016.
+ * Include only 2 fields
  */
+@SuppressWarnings("WeakerAccess")
 public class PokerPlayerSmall implements practice3.interfaces.IPokerPlayerSmall {
-    public static Integer SizeForRandom = 8; //length for random
+    //length for random
+    public static Integer SizeForRandom;
+    static {
+        SizeForRandom = 8;
+    }
+
     protected String username;
     protected String password;
 
@@ -47,6 +54,7 @@ public class PokerPlayerSmall implements practice3.interfaces.IPokerPlayerSmall 
         this.password = password;
     }
 
+    @SuppressWarnings("unused")
     public PokerPlayerSmall(String username) {
         this(username,null);
     }

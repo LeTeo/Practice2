@@ -2,7 +2,9 @@ package practice3.interfaces;
 
 /**
  * Created by ly0w on 02.12.2016.
+ * For poker player advance
  */
+@SuppressWarnings("unused")
 public interface IPokerPlayerAdvance {
     String getPlayerBalance();
 

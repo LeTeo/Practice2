@@ -39,26 +39,22 @@ public class LoginTests {
     private static final String WRONG_TITLE_AFTER_LOGIN = "Wrong title after login";
     private static final String VALIDATION_ERROR_MESSAGE_IS_NOT_VALID = "Validation error message is not valid";
     private static final String YOU_ARE_STILL_ON_LOGIN_PAGE = "You are still on login page.";
-    private WebDriver driver; // Declare var
-    private ILoginPage loginPage;
-
-    public WebDriver getDriver() {
-        return driver;
-    }
+    private WebDriver driver = null; // Declare var
+    private ILoginPage loginPage = null;
 
     /**
      * Open browser and set default settings
      */
     @BeforeTest
     public void beforeTest() {
-        //open browser
         driver = new FirefoxDriver(); //initialize/create object/open firefox
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     /**
-     * Open login page
+     * Precondition:
+     * 1-2. Open login page
      */
     @BeforeMethod
     public void beforeMethod() {
@@ -67,6 +63,7 @@ public class LoginTests {
     }
 
     /**
+     * Steps to reproduce:
      *                   username password
      *  1. Authorization "Admin", "123"
      *  2. Check TITLE
@@ -80,6 +77,7 @@ public class LoginTests {
     }
 
     /**
+     * Steps to reproduce:
      *                   username password
      *  1. Authorization "Admin",  Random
      *  2. Check URL
@@ -96,6 +94,7 @@ public class LoginTests {
 
 
     /**
+     * Steps to reproduce:
      *                   username password
      *  1. Authorization    "",    "123"
      *  2. Check URL
@@ -111,6 +110,7 @@ public class LoginTests {
     }
 
     /**
+     *  Steps to reproduce:
      *                   username password
      *  1. Authorization  "Admin",  ""
      *  2. Check URL
@@ -126,6 +126,7 @@ public class LoginTests {
     }
 
     /**
+     *  Steps to reproduce:
      *                   username password
      *  1. Authorization    "",      ""
      *  2. Check URL

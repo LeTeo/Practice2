@@ -4,6 +4,7 @@ import practice3.interfaces.IElements;
 
 /**
  * Created by ly0w on 03.12.2016.
+ * Elements for insert update fields
  */
 public class Elements extends PokerPlayer implements IElements {
     public Elements(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country) {

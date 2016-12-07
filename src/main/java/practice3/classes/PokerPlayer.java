@@ -15,16 +15,25 @@ import practice3.interfaces.IPokerPlayer;
  */
 public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
 
+    @SuppressWarnings("WeakerAccess")
     public static String MailDomenForRandom = "@gmail.com"; //length for random
 
 
+    @SuppressWarnings("WeakerAccess")
     protected String confirmPassword;
+    @SuppressWarnings("WeakerAccess")
 	protected String email;
+    @SuppressWarnings("WeakerAccess")
 	protected String firstName;
+    @SuppressWarnings("WeakerAccess")
 	protected String lastName;
+    @SuppressWarnings("WeakerAccess")
     protected String city;
+    @SuppressWarnings("WeakerAccess")
     protected String address;
+    @SuppressWarnings("WeakerAccess")
     protected String phone;
+    @SuppressWarnings("WeakerAccess")
     protected String country;
 
 
@@ -60,8 +69,7 @@ public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
         this.username = username;
         String password = RandomPassword();
         this.password = password;
-        String confirmPassword = password;
-        this.confirmPassword = confirmPassword;
+        this.confirmPassword = password;
         email = username + MailDomenForRandom;
         firstName = username.substring(0, username.length()/2); //First Part username
         lastName = username.substring(username.length()/2, username.length());//last part username
@@ -136,16 +144,14 @@ public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
         this.country = country;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PokerPlayer)) return false;
 
         PokerPlayer that = (PokerPlayer) o;
 
-        if (getUsername() != null ? !getUsername().equals(that.getUsername()) : that.getUsername() != null)
-            return false;
-        if (getPassword() != null ? !getPassword().equals(that.getPassword()) : that.getPassword() != null)
-            return false;
         if (getConfirmPassword() != null ? !getConfirmPassword().equals(that.getConfirmPassword()) : that.getConfirmPassword() != null)
             return false;
         if (getEmail() != null ? !getEmail().equals(that.getEmail()) : that.getEmail() != null) return false;
@@ -160,10 +166,9 @@ public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
 
     }
 
+    @Override
     public int hashCode() {
-        int result = getUsername() != null ? getUsername().hashCode() : 0;
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getConfirmPassword() != null ? getConfirmPassword().hashCode() : 0);
+        int result = getConfirmPassword() != null ? getConfirmPassword().hashCode() : 0;
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
         result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);

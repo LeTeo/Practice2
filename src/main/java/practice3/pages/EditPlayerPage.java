@@ -3,13 +3,13 @@ package practice3.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import practice3.classes.Elements;
-import practice3.interfaces.IElements;
+import practice3.classes.CRUDPokerPlayer;
 import practice3.interfaces.IPokerPlayer;
 import practice3.classes.PokerPlayer;
 
 /**
  * Created by Serhii on 30-Nov-16.
+ * Player - Edit page
  */
 public class EditPlayerPage implements practice3.interfaces.pages.IEditPlayerPage {
 
@@ -19,13 +19,27 @@ public class EditPlayerPage implements practice3.interfaces.pages.IEditPlayerPag
         this.driver = driver;
     }
 
-    public void editPokerPlayerAndSave(PokerPlayer pokerPlayer){
+    public void editPokerPlayerAndSave(IPokerPlayer pokerPlayer){
         IPokerPlayer pokerPlayerFromEditForm = getPokerPlayerFromEditForm();
         editPokerPlayerAndSave(pokerPlayer, pokerPlayerFromEditForm);
     }
 
     public void editPokerPlayerAndSave(IPokerPlayer pokerPlayer, IPokerPlayer pokerPlayerFromEditForm){
-        editPokerPlayerIntoForm(pokerPlayer, pokerPlayerFromEditForm.getCountry());
+        editPokerPlayerIntoFormWithCorrectErrors(pokerPlayer, pokerPlayerFromEditForm.getCountry());
+        clickOnButtonSave();
+    }
+    public void editPokerPlayerAndSaveAfterInsert(IPokerPlayer pokerPlayer){
+        IPokerPlayer pokerPlayerFromEditForm = getPokerPlayerFromEditForm();
+        editPokerPlayerAndSaveAfterInsert(pokerPlayer, pokerPlayerFromEditForm);
+    }
+
+    public void editPokerPlayerAndSaveAfterInsert(IPokerPlayer pokerPlayer, IPokerPlayer pokerPlayerFromEditForm){
+        editPokerPlayerIntoFormWithCorrectErrorsAfterInsert(pokerPlayer, pokerPlayerFromEditForm.getCountry());
+        clickOnButtonSave();
+    }
+
+    public void editPokerPlayerAndSaveWithoutCorrectErrors(IPokerPlayer pokerPlayer){
+        editPokerPlayerIntoFormWithoutCorrectErrorsEightField(pokerPlayer);
         clickOnButtonSave();
     }
 
@@ -38,8 +52,8 @@ public class EditPlayerPage implements practice3.interfaces.pages.IEditPlayerPag
     }
 
     //Correct errors on EDIT_FORM
-    public IPokerPlayer editPokerPlayerIntoForm(IPokerPlayer pokerPlayer, String actualCountry){
-
+    public IPokerPlayer editPokerPlayerIntoFormWithCorrectErrorsAfterInsert(IPokerPlayer pokerPlayer, String actualCountry){
+        
         //swap LastName & FirstName
         WebElement lastNameElement = driver.findElement(By.id(EDIT_FORM.getLastName()));
         lastNameElement.clear();
@@ -47,22 +61,55 @@ public class EditPlayerPage implements practice3.interfaces.pages.IEditPlayerPag
         WebElement firstNameElement = driver.findElement(By.id(EDIT_FORM.getFirstName()));
         firstNameElement.clear();
         firstNameElement.sendKeys(pokerPlayer.getLastName());
-
-
         driver.findElement(By.id(EDIT_FORM.getAddress())).sendKeys(pokerPlayer.getAddress());
-
-
         //set country from parameter @actualCountry
         WebElement countryElement = driver.findElement(By.id(EDIT_FORM.getCountry()));
 //        countryElement.clear();
         countryElement.sendKeys(actualCountry);
-
         return getPokerPlayerFromEditForm();
     }
 
+    public IPokerPlayer editPokerPlayerIntoFormWithCorrectErrors(IPokerPlayer pokerPlayer, String actualCountry){
+        editPokerPlayerIntoFormWithoutCorrectErrors(pokerPlayer);
+        //swap LastName & FirstName
+        WebElement lastNameElement = driver.findElement(By.id(EDIT_FORM.getLastName()));
+        lastNameElement.clear();
+        lastNameElement.sendKeys(pokerPlayer.getFirstName());
+        WebElement firstNameElement = driver.findElement(By.id(EDIT_FORM.getFirstName()));
+        firstNameElement.clear();
+        firstNameElement.sendKeys(pokerPlayer.getLastName());
+        WebElement addressElement = driver.findElement(By.id(EDIT_FORM.getAddress()));
+        if(!addressElement.getAttribute(VALUE).equals("")) addressElement.clear();
+        addressElement.sendKeys(pokerPlayer.getAddress());
+        //set country from parameter @actualCountry
+        WebElement countryElement = driver.findElement(By.id(EDIT_FORM.getCountry()));
+        countryElement.sendKeys(actualCountry);
+        return getPokerPlayerFromEditForm();
+    }
+    
+    private void editPokerPlayerIntoFormWithoutCorrectErrors(IPokerPlayer pokerPlayer){
+        driver.findElement(By.id(EDIT_FORM.getEmail())).clear();
+        driver.findElement(By.id(EDIT_FORM.getCity())).clear();
+        driver.findElement(By.id(EDIT_FORM.getPhone())).clear();
+        driver.findElement(By.id(EDIT_FORM.getEmail())).sendKeys(pokerPlayer.getEmail());
+        driver.findElement(By.id(EDIT_FORM.getCity())).sendKeys(pokerPlayer.getCity());
+        driver.findElement(By.id(EDIT_FORM.getPhone())).sendKeys(pokerPlayer.getPhone());
+        driver.findElement(By.id(EDIT_FORM.getCountry())).sendKeys(pokerPlayer.getCountry());//5
+    }
+
+    private void editPokerPlayerIntoFormWithoutCorrectErrorsEightField(IPokerPlayer pokerPlayer){
+        driver.findElement(By.id(EDIT_FORM.getFirstName())).clear();//5
+        driver.findElement(By.id(EDIT_FORM.getLastName())).clear();
+        driver.findElement(By.id(EDIT_FORM.getAddress())).clear();
+        driver.findElement(By.id(EDIT_FORM.getFirstName())).sendKeys(pokerPlayer.getFirstName());//5
+        driver.findElement(By.id(EDIT_FORM.getLastName())).sendKeys(pokerPlayer.getLastName());
+        driver.findElement(By.id(EDIT_FORM.getAddress())).sendKeys(pokerPlayer.getAddress());
+        editPokerPlayerIntoFormWithoutCorrectErrors(pokerPlayer);
+    }
+
+
     public IPokerPlayer getPokerPlayerFromEditForm(){
         return new PokerPlayer(
-
                 driver.findElement(By.id(EDIT_FORM.getUsername())).getAttribute(VALUE),
                 driver.findElement(By.id(EDIT_FORM.getEmail())).getAttribute(VALUE),
                 driver.findElement(By.id(EDIT_FORM.getFirstName())).getAttribute(VALUE),
@@ -71,7 +118,8 @@ public class EditPlayerPage implements practice3.interfaces.pages.IEditPlayerPag
                 driver.findElement(By.id(EDIT_FORM.getAddress())).getAttribute(VALUE),
                 driver.findElement(By.id(EDIT_FORM.getPhone())).getAttribute(VALUE),
                 driver.findElement(By.id(EDIT_FORM.getCountry())).getAttribute(VALUE)
-
         );
     }
+
+
 }

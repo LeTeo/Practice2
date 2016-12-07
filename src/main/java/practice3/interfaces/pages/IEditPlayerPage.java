@@ -7,6 +7,7 @@ import practice3.interfaces.IPokerPlayer;
 
 /**
  * Created by ly0w on 04.12.2016.
+ * Include const fields
  */
 public interface IEditPlayerPage {
     IElements EDIT_FORM = new Elements(
@@ -17,18 +18,25 @@ public interface IEditPlayerPage {
     String BUTTON_SAVE = "button_save";
     String BUTTON_CANCEL = "button_cancel";
     String VALUE = "value";
+    @SuppressWarnings("unused")
     String CANCEL_ALERT_MESSAGE = "Do you really want to cancel? All changes will be lost";
-
-    void editPokerPlayerAndSave(PokerPlayer pokerPlayer);
+    @SuppressWarnings("unused")
+    void editPokerPlayerAndSave(IPokerPlayer pokerPlayer);
 
     void editPokerPlayerAndSave(IPokerPlayer pokerPlayer, IPokerPlayer pokerPlayerFromEditForm);
 
-    void clickOnButtonSave();
+    void editPokerPlayerAndSaveAfterInsert(IPokerPlayer pokerPlayer);
 
+    void editPokerPlayerAndSaveAfterInsert(IPokerPlayer pokerPlayer, IPokerPlayer pokerPlayerFromEditForm);
+
+    void editPokerPlayerAndSaveWithoutCorrectErrors(IPokerPlayer pokerPlayer);
+
+    void clickOnButtonSave();
+    @SuppressWarnings("unused")
     void clickOnButtonCancel();
 
     //Correct errors on EDIT_FORM
-    IPokerPlayer editPokerPlayerIntoForm(IPokerPlayer pokerPlayer, String actualCountry);
+    IPokerPlayer editPokerPlayerIntoFormWithCorrectErrors(IPokerPlayer pokerPlayer, String actualCountry);
 
     IPokerPlayer getPokerPlayerFromEditForm();
 }

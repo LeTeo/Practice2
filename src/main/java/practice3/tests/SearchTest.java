@@ -13,14 +13,14 @@ import practice3.pages.PlayersPage;
  */
 public class SearchTest {
     private WebDriver driver; // Declare var
-    private IPlayersPage IPlayersPage;
+    private IPlayersPage playersPage;
     private CRUDUserTests crudUserTests;
 
     @BeforeTest
     public void beforeTest() {
         crudUserTests = new CRUDUserTests();
         crudUserTests.beforeTest();
-        IPlayersPage = new PlayersPage(driver);
+        playersPage = new PlayersPage(driver);
     }
 
     @AfterTest

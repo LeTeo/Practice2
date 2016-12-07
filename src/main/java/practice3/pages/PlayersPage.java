@@ -3,6 +3,7 @@ package practice3.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import practice3.classes.PokerPlayer;
 import practice3.interfaces.IPokerPlayer;
 import practice3.interfaces.pages.IEditPlayerPage;
 
@@ -12,19 +13,8 @@ import practice3.interfaces.pages.IEditPlayerPage;
  */
 public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
 
-    public static final String TITLE = "Players";
-    public static final String URL = "http://80.92.229.236:81/players";
-    public static final String XPATH_PLAYERS_INSERT = ".//a[@href='http://80.92.229.236:81/players/insert']";
-    public static final String USERNAME_FIELD_ID = "723a925886__login";
-    public static final String XPATH_INPUT_SEARCH = ".//input[@VALUE='Search']";
-    public static final String XPATH_FIND_USERNAME_EDIT_OPEN = ".//tr[.//a[text()='";
-    public static final String XPATH_FIND_USERNAME_EDIT_CLOSE = "']]//img[@title='Edit']";
-    public static final String XPATH_FIND_USERNAME_DELETE_OPEN = ".//tr[.//a[text()='";
-    public static final String XPATH_FIND_USERNAME_DELETE_CLOSE = "']]//img[@title='Delete']";
-    public static final String XPATH_DELETE_SUCCESS = ".//div[@class='datagrid_flashmessagespanel_container']/ul";
-    public static final String VALUE = "value";
     private static final String EMAIL_FIELD_ID = "723a925886__email";
-    public static final String DELETE_MESSAGE = "Player has been deleted";
+    private static final String URL_SORT_PLAYERS_BY_INDEX_DESC = "http://80.92.229.236:81/players/index/sort/us_person_id/order/DESC";
 
     private WebDriver driver;
 
@@ -38,6 +28,10 @@ public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
 
     public void clickOnInsertButton(){
         driver.findElement(By.xpath(XPATH_PLAYERS_INSERT)).click();
+    }
+
+    public void clickOnResetButton() {
+        driver.findElement(By.xpath(XPATH_BUTTON_RESET)).click();
     }
 
     public void clickOnEditButton(String username){
@@ -80,7 +74,7 @@ public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
 
 
     public IPokerPlayer insertPlayerClone(PlayersPage playersPage, IPokerPlayer pokerPlayer, IEditPlayerPage editPlayerPage) {
-        playersPage.clickOnInsertButton();
+        //playersPage.clickOnInsertButton();
         playersPage.findPlayerByUsername(pokerPlayer.getUsername());
         playersPage.openEditFormByUsername(pokerPlayer.getUsername());
         IPokerPlayer pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
@@ -88,5 +82,27 @@ public class PlayersPage implements practice3.interfaces.pages.IPlayersPage {
         playersPage.openEditFormByUsername(pokerPlayer.getUsername());
         pokerPlayerFromEditForm = editPlayerPage.getPokerPlayerFromEditForm();
         return pokerPlayerFromEditForm;
+    }
+
+    public IPokerPlayer findUserPokerPlayerNameAndEmailLastCreatedUserById() {
+        //driver.findElement(By.xpath(XPATH_PERSON_ID_SORT_ASC_CLICK)).click();
+        driver.get(URL_SORT_PLAYERS_BY_INDEX_DESC);
+        IPokerPlayer pokerPlayerTopFind = new PokerPlayer();
+        pokerPlayerTopFind.setUsername(getTopUsername());
+        pokerPlayerTopFind.setEmail(getTopEmail());
+        return pokerPlayerTopFind;
+    }
+
+    public void findPlayerByUsernameAndEmail(IPokerPlayer readPokerPlayer) {
+        findPlayerByUsernameAndEmail(readPokerPlayer.getUsername(),readPokerPlayer.getEmail());
+    }
+
+    private String getTopEmail() {
+
+        return driver.findElement(By.xpath(XPATH_EMAIL_TOP)).getText();
+    }
+
+    private String getTopUsername() {
+        return driver.findElement(By.xpath(XPATH_USERNAME_TOP)).getText();
     }
 }

@@ -1,10 +1,10 @@
 package practice3.interfaces;
 
-import practice3.classes.PokerPlayer;
-
 /**
  * Created by ly0w on 02.12.2016.
+ * Poker player interface
  */
+
 public interface IPokerPlayer {
     IPokerPlayer RandomFields();
 
@@ -17,11 +17,11 @@ public interface IPokerPlayer {
     void setEmail(String email);
 
     String getFirstName();
-
+    @SuppressWarnings("unused")
     void setFirstName(String firstName);
 
     String getLastName();
-
+    @SuppressWarnings("unused")
     void setLastName(String lastName);
 
     String getCity();
@@ -41,7 +41,7 @@ public interface IPokerPlayer {
     void setPassword(String password);
 
     String getConfirmPassword();
-
+    @SuppressWarnings("unused")
     void setConfirmPassword(String confirmPassword);
 
     String getCountry();
