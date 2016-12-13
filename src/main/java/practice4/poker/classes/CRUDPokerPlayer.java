@@ -1,6 +1,7 @@
 package practice4.poker.classes;
 
 import practice4.poker.interfaces.IPokerPlayer;
+import practice4.poker.interfaces.IPokerPlayerSmall;
 
 
 /**
@@ -30,5 +31,15 @@ public class CRUDPokerPlayer {
     public static IPokerPlayer editPokerPlayer(IPokerPlayer oldPokerPlayer, IPokerPlayer newPokerPlayer){
         newPokerPlayer.setUsername(oldPokerPlayer.getUsername());
         return newPokerPlayer;
+    }
+
+    public static IPokerPlayerSmall randomPokerPlayerSmall()
+    {
+        return new PokerPlayerSmall(PokerPlayerSmall.RandomUsername(),PokerPlayerSmall.RandomPassword());
+    }
+
+    public static IPokerPlayer randomPokerPlayer()
+    {
+        return new PokerPlayer().RandomFields();
     }
 }

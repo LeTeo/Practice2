@@ -3,6 +3,8 @@ package practice4.poker.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import practice4.poker.classes.PokerPlayer;
 import practice4.poker.interfaces.IPokerPlayer;
 import practice4.poker.interfaces.pages.IEditPlayerPage;
@@ -14,10 +16,23 @@ import practice4.poker.interfaces.pages.IPlayersPage;
  */
 public class PlayersPage implements IPlayersPage {
 
-    private static final String EMAIL_FIELD_ID = "723a925886__email";
-    private static final String URL_SORT_PLAYERS_BY_INDEX_DESC = "http://80.92.229.236:81/players/index/sort/us_person_id/order/DESC";
-
     private WebDriver driver;
+    @FindBy(id = USERNAME_FIELD_ID)
+    private WebElement usernameField;
+    @FindBy(id = EMAIL_FIELD_ID)
+    private WebElement emailField;
+    @FindBy(xpath = XPATH_PLAYERS_INSERT)
+    private WebElement insertButton;
+    @FindBy(xpath = XPATH_BUTTON_RESET)
+    private WebElement resetButton;
+    @FindBy(xpath = XPATH_INPUT_SEARCH)
+    private WebElement searchButton;
+    @FindBy(xpath = XPATH_DELETE_SUCCESS)
+    private WebElement deleteMessage;
+    @FindBy(xpath = XPATH_EMAIL_TOP)
+    private WebElement emailTop;
+    @FindBy(xpath = XPATH_USERNAME_TOP)
+    private WebElement usernameTop;
 
     public void open() {
         driver.get(URL);
@@ -25,26 +40,25 @@ public class PlayersPage implements IPlayersPage {
 
     public PlayersPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver,this);
     }
 
     public void clickOnInsertButton(){
-        driver.findElement(By.xpath(XPATH_PLAYERS_INSERT)).click();
+        insertButton.click();
     }
 
     public void clickOnResetButton() {
-        driver.findElement(By.xpath(XPATH_BUTTON_RESET)).click();
+        resetButton.click();
     }
 
     public void clickOnEditButton(String username){
         openEditFormByUsername(username);
     }
 
-
     public void findPlayerByUsername(String username){
-        WebElement usernameField = driver.findElement(By.id(USERNAME_FIELD_ID));
         if(!usernameField.getAttribute(VALUE).equals("")) usernameField.clear();
             usernameField.sendKeys(username);
-        driver.findElement(By.xpath(XPATH_INPUT_SEARCH)).click();
+        searchButton.click();
     }
 
     public void openEditFormByUsername(String username) {
@@ -58,21 +72,16 @@ public class PlayersPage implements IPlayersPage {
     }
 
     public void findPlayerByUsernameAndEmail(String username, String email) {
-        WebElement usernameField = driver.findElement(By.id(USERNAME_FIELD_ID));
         if(!usernameField.getAttribute(VALUE).equals("")) usernameField.clear();
         usernameField.sendKeys(username);
-        WebElement emailField = driver.findElement(By.id(EMAIL_FIELD_ID));
         if(!emailField.getAttribute(VALUE).equals("")) emailField.clear();
         emailField.sendKeys(email);
-        driver.findElement(By.xpath(XPATH_INPUT_SEARCH)).click();
+        searchButton.click();
     }
-
 
     public String getDeleteMessage() {
-
-        return driver.findElement(By.xpath(XPATH_DELETE_SUCCESS)).getText();
+        return deleteMessage.getText();
     }
-
 
     public IPokerPlayer insertPlayerClone(PlayersPage playersPage, IPokerPlayer pokerPlayer, IEditPlayerPage editPlayerPage) {
         //playersPage.clickOnInsertButton();
@@ -99,11 +108,10 @@ public class PlayersPage implements IPlayersPage {
     }
 
     private String getTopEmail() {
-
-        return driver.findElement(By.xpath(XPATH_EMAIL_TOP)).getText();
+        return emailTop.getText();
     }
 
     private String getTopUsername() {
-        return driver.findElement(By.xpath(XPATH_USERNAME_TOP)).getText();
+        return usernameTop.getText();
     }
 }

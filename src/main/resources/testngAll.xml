@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Poker Suite + Drag and Drop Suite" verbose="1" >
+    <test name="Login positive test">
+        <parameter name="usrn" value="admin"/>
+        <parameter name="pswrd" value="123"/>
+        <classes>
+            <class name="practice4.poker.tests.LoginTests" />
+        </classes>
+    </test>
+    <test name="CRUD Tests">
+        <classes>
+            <class name="practice4.poker.tests.CRUDUserTests"/>
+        </classes>
+    </test>
+    <test name="Drag and drop 2 Tests">
+        <classes>
+            <class name="practice4.draggable.tests.DragAndDrop2Tests"/>
+        </classes>
+    </test> <!-- Drag and drop 2 Tests -->
+</suite>

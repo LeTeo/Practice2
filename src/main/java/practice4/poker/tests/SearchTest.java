@@ -12,19 +12,5 @@ import practice4.poker.pages.PlayersPage;
  * Реализовать наиболее важные и приоритетные сценарии для проверки формы Search на странице Players.
  */
 public class SearchTest {
-    private WebDriver driver; // Declare var
-    private IPlayersPage playersPage;
-    private CRUDUserTests crudUserTests;
 
-    @BeforeTest
-    public void beforeTest() {
-        crudUserTests = new CRUDUserTests();
-        crudUserTests.beforeTest();
-        playersPage = new PlayersPage(driver);
-    }
-
-    @AfterTest
-    public void afterTest(){
-        crudUserTests.afterTest();
-    }
 }

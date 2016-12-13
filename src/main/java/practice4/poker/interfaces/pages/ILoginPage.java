@@ -20,9 +20,6 @@ public interface ILoginPage {
 
     void open();
 
-    @Deprecated
-    void login(String username, String password);
-
     void setUsername(String username);
 
     void setPassword(String password);

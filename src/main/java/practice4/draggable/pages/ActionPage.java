@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by Admin on 07.12.2016.
+ * Example on practice 4
  */
 public class ActionPage {
 

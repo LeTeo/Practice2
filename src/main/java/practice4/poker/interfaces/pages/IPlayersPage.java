@@ -25,6 +25,8 @@ public interface IPlayersPage {
     String XPATH_DELETE_SUCCESS = ".//div[@class='datagrid_flashmessagespanel_container']/ul";
     String VALUE = "value";
     String DELETE_MESSAGE = "Player has been deleted";
+    String EMAIL_FIELD_ID = "723a925886__email";
+    String URL_SORT_PLAYERS_BY_INDEX_DESC = "http://80.92.229.236:81/players/index/sort/us_person_id/order/DESC";
 
     void open();
 

@@ -3,6 +3,7 @@ package practice4.draggable.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Admin on 07.12.2016.
+ * Example on practice 4
  */
 public class ActionTests {
     private WebDriver driver = null;
@@ -20,9 +22,14 @@ public class ActionTests {
 
     @BeforeTest
     public void beforeTest(){
-        FirefoxDriver driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+    }
+
+    @BeforeMethod
+    public void beforeMethod() throws Exception {
         actionPage = new ActionPage(driver);
         softAssert = new SoftAssert();
     }
@@ -45,6 +52,6 @@ public class ActionTests {
 
     @AfterTest
     public void afterTest(){
-//        driver.quit();
+        driver.quit();
     }
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CRUDUser Suite">
+    <test name="Practice4">
+        <classes>
+            <class name="practice4.poker.tests.CRUDUserTests"/>
+        </classes>
+    </test> <!-- Practice4 -->
+</suite> <!-- CRUDUser Suite -->

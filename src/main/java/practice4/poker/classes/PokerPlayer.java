@@ -9,9 +9,8 @@ import practice4.poker.interfaces.IPokerPlayer;
  *          PokerPlayerSmall (IPokerPlayerSmall)
  *                  |
  *             PokerPlayer (IPokerPlayer)
- *                  |                  \
- *                  |               Elements (IElements) (Only read PokerPlayer)
- *          PokerPlayerAdvance
+ *                  |
+ *          PokerPlayerAdvance (IPokerPlayerAdvance)
  */
 public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
 
@@ -36,12 +35,9 @@ public class PokerPlayer extends PokerPlayerSmall implements IPokerPlayer {
     @SuppressWarnings("WeakerAccess")
     protected String country;
 
-
-
-
-    public PokerPlayer() {
+    public PokerPlayer(){
+        super();
     }
-
 
     //String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country
     public PokerPlayer(String username, String password, String confirmPassword, String email, String first_Name, String last_Name, String city, String address, String phone, String country) {

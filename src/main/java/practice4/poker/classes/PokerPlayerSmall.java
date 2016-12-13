@@ -18,6 +18,19 @@ public class PokerPlayerSmall implements IPokerPlayerSmall {
     protected String username;
     protected String password;
 
+    public PokerPlayerSmall(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    public PokerPlayerSmall(){
+
+    }
+
+    @SuppressWarnings("unused")
+    public PokerPlayerSmall(String username) {
+        this(username,null);
+    }
+
     public static String RandomUsername(int count) {
         return RandomStringUtils.randomAlphabetic(count);
     }
@@ -50,17 +63,30 @@ public class PokerPlayerSmall implements IPokerPlayerSmall {
         this.password = password;
     }
 
-    public PokerPlayerSmall(String username, String password) {
-        this.username = username;
-        this.password = password;
+    @Override
+    public String toString() {
+        return "PokerPlayer{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
-    @SuppressWarnings("unused")
-    public PokerPlayerSmall(String username) {
-        this(username,null);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PokerPlayerSmall that = (PokerPlayerSmall) o;
+
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        return password != null ? password.equals(that.password) : that.password == null;
+
     }
 
-    public PokerPlayerSmall(){
-
+    @Override
+    public int hashCode() {
+        int result = username != null ? username.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 }

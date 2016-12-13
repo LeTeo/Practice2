@@ -117,7 +117,7 @@ public class PokerPlayerAdvance extends PokerPlayer implements IPokerPlayerAdvan
     }
 
     public String toString() {
-        return "PokerPlayerAdvance{" +
+        return "PokerPlayer{" +
                 "playerBalance='" + playerBalance + '\'' +
                 ", state='" + state + '\'' +
                 ", lastLogin='" + lastLogin + '\'' +

@@ -100,7 +100,6 @@ public class CRUDUserTests  {
      */
     @Test//(groups = INSERT_GROUP)
     public void insertUserPositiveTest(){
-
         playersPage.clickOnInsertButton();IPokerPlayer pokerPlayer;
         Assert.assertEquals(driver.getTitle(), IInsertPlayerPage.TITLE, WRONG_TITLE);
         Assert.assertEquals(driver.getCurrentUrl(), IInsertPlayerPage.URL, YOU_ARE_NOT_ON_INSERT_PAGE);

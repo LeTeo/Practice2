@@ -3,9 +3,12 @@ package practice4.poker.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import practice4.poker.classes.PokerPlayer;
 import practice4.poker.interfaces.IPokerPlayer;
 import practice4.poker.interfaces.pages.IEditPlayerPage;
+
 
 /**
  * Created by Serhii on 30-Nov-16.
@@ -14,9 +17,30 @@ import practice4.poker.interfaces.pages.IEditPlayerPage;
 public class EditPlayerPage implements IEditPlayerPage {
 
     private WebDriver driver;
+    @FindBy(id = LAST_NAME_ID)
+    public WebElement lastNameElement;
+    @FindBy(id = FIRST_NAME_ID)
+    private WebElement firstNameElement;
+    @FindBy(id = COUNTRY_ID)
+    private WebElement countryElement;
+    @FindBy(id = ADDRESS_ID)
+    private WebElement addressElement;
+    @FindBy(id = EMAIL_ID)
+    private WebElement emailElement;
+    @FindBy(id = CITY_ID)
+    private WebElement cityElement;
+    @FindBy(id = PHONE_ID)
+    private WebElement phoneElement;
+    @FindBy(id = USERNAME_ID)
+    private WebElement usernameElement;
+    @FindBy(name = BUTTON_SAVE)
+    private WebElement saveButton;
+    @FindBy(name = BUTTON_CANCEL)
+    private WebElement cancelButton;
 
     public EditPlayerPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver,this);
     }
 
     public void editPokerPlayerAndSave(IPokerPlayer pokerPlayer){
@@ -44,26 +68,22 @@ public class EditPlayerPage implements IEditPlayerPage {
     }
 
     public void clickOnButtonSave(){
-        driver.findElement(By.name(BUTTON_SAVE)).click();
+        saveButton.click();
     }
 
     public void clickOnButtonCancel(){
-        driver.findElement(By.name(BUTTON_CANCEL)).click();
+        cancelButton.click();
     }
 
     //Correct errors on EDIT_FORM
     public IPokerPlayer editPokerPlayerIntoFormWithCorrectErrorsAfterInsert(IPokerPlayer pokerPlayer, String actualCountry){
-        
         //swap LastName & FirstName
-        WebElement lastNameElement = driver.findElement(By.id(EDIT_FORM.getLastName()));
         lastNameElement.clear();
         lastNameElement.sendKeys(pokerPlayer.getFirstName());
-        WebElement firstNameElement = driver.findElement(By.id(EDIT_FORM.getFirstName()));
         firstNameElement.clear();
         firstNameElement.sendKeys(pokerPlayer.getLastName());
-        driver.findElement(By.id(EDIT_FORM.getAddress())).sendKeys(pokerPlayer.getAddress());
+        addressElement.sendKeys(pokerPlayer.getAddress());
         //set country from parameter @actualCountry
-        WebElement countryElement = driver.findElement(By.id(EDIT_FORM.getCountry()));
 //        countryElement.clear();
         countryElement.sendKeys(actualCountry);
         return getPokerPlayerFromEditForm();
@@ -72,54 +92,48 @@ public class EditPlayerPage implements IEditPlayerPage {
     public IPokerPlayer editPokerPlayerIntoFormWithCorrectErrors(IPokerPlayer pokerPlayer, String actualCountry){
         editPokerPlayerIntoFormWithoutCorrectErrors(pokerPlayer);
         //swap LastName & FirstName
-        WebElement lastNameElement = driver.findElement(By.id(EDIT_FORM.getLastName()));
         lastNameElement.clear();
         lastNameElement.sendKeys(pokerPlayer.getFirstName());
-        WebElement firstNameElement = driver.findElement(By.id(EDIT_FORM.getFirstName()));
         firstNameElement.clear();
         firstNameElement.sendKeys(pokerPlayer.getLastName());
-        WebElement addressElement = driver.findElement(By.id(EDIT_FORM.getAddress()));
         if(!addressElement.getAttribute(VALUE).equals("")) addressElement.clear();
         addressElement.sendKeys(pokerPlayer.getAddress());
         //set country from parameter @actualCountry
-        WebElement countryElement = driver.findElement(By.id(EDIT_FORM.getCountry()));
         countryElement.sendKeys(actualCountry);
         return getPokerPlayerFromEditForm();
     }
     
     private void editPokerPlayerIntoFormWithoutCorrectErrors(IPokerPlayer pokerPlayer){
-        driver.findElement(By.id(EDIT_FORM.getEmail())).clear();
-        driver.findElement(By.id(EDIT_FORM.getCity())).clear();
-        driver.findElement(By.id(EDIT_FORM.getPhone())).clear();
-        driver.findElement(By.id(EDIT_FORM.getEmail())).sendKeys(pokerPlayer.getEmail());
-        driver.findElement(By.id(EDIT_FORM.getCity())).sendKeys(pokerPlayer.getCity());
-        driver.findElement(By.id(EDIT_FORM.getPhone())).sendKeys(pokerPlayer.getPhone());
-        driver.findElement(By.id(EDIT_FORM.getCountry())).sendKeys(pokerPlayer.getCountry());//5
+        emailElement.clear();
+        cityElement.clear();
+        phoneElement.clear();
+        emailElement.sendKeys(pokerPlayer.getEmail());
+        cityElement.sendKeys(pokerPlayer.getCity());
+        phoneElement.sendKeys(pokerPlayer.getPhone());
+        countryElement.sendKeys(pokerPlayer.getCountry());//5
     }
 
     private void editPokerPlayerIntoFormWithoutCorrectErrorsEightField(IPokerPlayer pokerPlayer){
-        driver.findElement(By.id(EDIT_FORM.getFirstName())).clear();//5
-        driver.findElement(By.id(EDIT_FORM.getLastName())).clear();
-        driver.findElement(By.id(EDIT_FORM.getAddress())).clear();
-        driver.findElement(By.id(EDIT_FORM.getFirstName())).sendKeys(pokerPlayer.getFirstName());//5
-        driver.findElement(By.id(EDIT_FORM.getLastName())).sendKeys(pokerPlayer.getLastName());
-        driver.findElement(By.id(EDIT_FORM.getAddress())).sendKeys(pokerPlayer.getAddress());
+        firstNameElement.clear();//5
+        lastNameElement.clear();
+        addressElement.clear();
+        firstNameElement.sendKeys(pokerPlayer.getFirstName());//5
+        lastNameElement.sendKeys(pokerPlayer.getLastName());
+        addressElement.sendKeys(pokerPlayer.getAddress());
         editPokerPlayerIntoFormWithoutCorrectErrors(pokerPlayer);
     }
 
-
     public IPokerPlayer getPokerPlayerFromEditForm(){
         return new PokerPlayer(
-                driver.findElement(By.id(EDIT_FORM.getUsername())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getEmail())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getFirstName())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getLastName())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getCity())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getAddress())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getPhone())).getAttribute(VALUE),
-                driver.findElement(By.id(EDIT_FORM.getCountry())).getAttribute(VALUE)
+            usernameElement.getAttribute(VALUE),
+            emailElement.getAttribute(VALUE),
+            firstNameElement.getAttribute(VALUE),
+            lastNameElement.getAttribute(VALUE),
+            cityElement.getAttribute(VALUE),
+            addressElement.getAttribute(VALUE),
+            phoneElement.getAttribute(VALUE),
+            countryElement.getAttribute(VALUE)
         );
     }
-
 
 }
